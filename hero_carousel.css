@@ -1,0 +1,266 @@
+
+/* =========================================
+   WANDERMORE - HERO CAROUSEL
+========================================= */
+
+.hero-section {
+    width: 100%;
+    padding: 50px 0;
+    background: #f4f4f4;
+}
+
+.hero-container {
+    width: 70%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+/* =========================================
+   SLIDES
+========================================= */
+
+.hero-carousel-slides {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-carousel-slide {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    animation: heroFade 300ms ease;
+}
+
+.hero-carousel-slide.active {
+    display: block;
+}
+
+@keyframes heroFade {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+/* =========================================
+   FIGURE
+========================================= */
+
+.hero-carousel-slide figure {
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+
+/* =========================================
+   IMAGE CONTAINER
+========================================= */
+
+.hero-image {
+    position: relative;
+    flex: 1 1 75%;
+    width: 75%;
+    min-width: 0;
+
+    aspect-ratio: 3 / 2;
+
+    overflow: hidden;
+    background: #222;
+}
+
+/* SFONDO SFUOCATO */
+
+.hero-image::before {
+    content: "";
+    position: absolute;
+    inset: -25px;
+
+    background-image: var(--hero-bg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    filter: blur(5px);
+    opacity: 5.0;
+
+    z-index: 0;
+}
+
+/* FOTOGRAFIA ORIGINALE */
+
+.hero-image img {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: contain !important;
+    object-position: center;
+
+    z-index: 1;
+}
+
+/* =========================================
+   CAPTION
+========================================= */
+
+.hero-carousel-slide figcaption {
+    align-self: flex-end;
+
+    flex: 0 0 25%;
+    min-width: 0;
+
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hero-credit {
+    display: block;
+    margin-top: 1rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   THUMBNAILS - SCROLL
+========================================= */
+
+.hero-carousel-thumbnails {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+
+    width: 100%;
+
+    padding: 5px 4px;
+    margin: 20px 0 0 !important;
+
+    gap: 12px;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+
+    list-style: none !important;
+    box-sizing: border-box;
+}
+
+/* MINIATURE */
+
+.hero-carousel-thumbnails li {
+    flex: 0 0 120px !important;
+
+    width: 120px !important;
+    min-width: 120px !important;
+    height: 120px !important;
+
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
+
+    transition: box-shadow 300ms ease;
+}
+
+/* BUTTON */
+
+.hero-carousel-thumbnails button {
+    display: block !important;
+
+    width: 120px !important;
+    height: 120px !important;
+
+    padding: 0 !important;
+    border: 0 !important;
+
+    overflow: hidden !important;
+
+    background: transparent;
+    cursor: pointer;
+}
+
+/* THUMBNAIL IMAGE */
+
+.hero-carousel-thumbnails img {
+    display: block !important;
+
+    width: 120px !important;
+    height: 120px !important;
+
+    max-width: none !important;
+
+    object-fit: cover !important;
+    aspect-ratio: 1 / 1;
+}
+
+/* MINIATURA ATTIVA */
+
+.hero-carousel-thumbnails li.active {
+    box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.5);
+}
+
+/* HOVER */
+
+.hero-carousel-thumbnails li:hover img {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hero-carousel-slide figure {
+        flex-direction: column;
+    }
+
+    .hero-image {
+        flex: none;
+        width: 100%;
+    }
+
+    .hero-carousel-slide figcaption {
+        flex: none;
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    .hero-carousel-thumbnails {
+        gap: 6px;
+    }
+
+    .hero-carousel-thumbnails li {
+        flex: 0 0 85px !important;
+        width: 85px !important;
+        min-width: 85px !important;
+        height: 85px !important;
+    }
+
+    .hero-carousel-thumbnails button {
+        width: 85px !important;
+        height: 85px !important;
+    }
+
+    .hero-carousel-thumbnails img {
+        width: 85px !important;
+        height: 85px !important;
+    }
+}

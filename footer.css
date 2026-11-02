@@ -1,0 +1,247 @@
+
+/* ==========================
+   WANDERMORE FOOTER
+========================== */
+
+.travel-footer {
+    background: #292929;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* TITOLO */
+
+.footer-title {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.footer-subtitle {
+    color: #aaa;
+    font-size: 12px;
+    letter-spacing: .5px;
+    margin: 0;
+}
+
+/* ==========================
+   COUNTRY CAROUSEL
+========================== */
+
+.country-slider {
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 5%,
+        #000 95%,
+        transparent
+    );
+
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 5%,
+        #000 95%,
+        transparent
+    );
+}
+
+.country-track {
+    display: flex;
+    width: 100%;
+    min-width: calc(var(--width) * var(--quantity));
+    position: relative;
+}
+
+.country-item {
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    left: 100%;
+
+    animation: countryAutoRun 45s linear infinite;
+    animation-delay: var(--delay);
+}
+
+/* CARD CON BORDO BANDIERA */
+
+.country-card {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    border: none;
+    outline: none;
+    border-radius: 12px;
+
+    background-image: var(--flag);
+    background-size: cover;
+    background-position: center;
+
+    text-decoration: none;
+
+    transition: transform 0.4s ease,
+                box-shadow 0.4s ease;
+}
+
+.country-card-body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.country-card-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 0.6s ease,
+                filter 0.6s ease;
+}
+
+.country-card:hover .country-card-body img {
+    transform: scale(1.13);
+    filter: brightness(0.75);
+}
+
+.country-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* NOME DEL PAESE */
+
+.country-card-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    padding: 25px 10px 12px;
+
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8),
+        transparent
+    );
+
+    transition: padding 0.4s ease;
+}
+
+.country-card:hover .country-card-name {
+    padding-bottom: 20px;
+}
+
+/* HOVER */
+
+.country-slider:hover .country-item {
+    animation-play-state: paused;
+}
+
+.country-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 5px 18px rgba(0,0,0,.5);
+}
+
+.country-card:hover img {
+    transform: scale(1.1);
+}
+
+/* ANIMAZIONE */
+
+@keyframes countryAutoRun {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: calc(var(--width) * -1);
+    }
+}
+
+/* ==========================
+   FOOTER BOTTOM
+========================== */
+
+.footer-bottom {
+    border-top: 1px solid #444;
+}
+
+.footer-bottom p {
+    color: #999;
+    font-size: 11px;
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: #b58d70;
+    text-decoration: none;
+}
+
+/* SOCIAL */
+
+.footer-socials {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: #ccc;
+    font-size: 19px;
+    transition: color .3s, transform .3s;
+}
+
+.footer-socials a:hover {
+    color: #b58d70;
+    transform: translateY(-3px);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 767px) {
+
+    .footer-title {
+        font-size: 21px;
+    }
+
+    .country-slider {
+        --width: 165px;
+        --height: 140px;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
+
+    .footer-socials {
+        justify-content: center;
+    }
+
+}
+
+/* ACCESSIBILITÀ */
+
+@media (prefers-reduced-motion: reduce) {
+    .country-item {
+        animation-play-state: paused;
+    }
+}
