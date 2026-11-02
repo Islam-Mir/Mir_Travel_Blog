@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
+<body class="d-flex flex-column h-100">
 
 <?php include 'header.php'; ?>
 
-<section class="py-5 bg-light">
+<section class="py-5 bg-light flex-grow-1">
 
     <div class="container">
 
