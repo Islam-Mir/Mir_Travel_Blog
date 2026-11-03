@@ -1,4 +1,3 @@
-
 /* =========================================
    WANDERMORE - DYNAMIC HERO CAROUSEL
 ========================================= */
@@ -76,7 +75,6 @@ const heroPhotos = [
         caption: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         credit: "Rosan Harmens"
     },
-
 
     {
         image: "images/hero-carousel/bari.jpg",
@@ -249,6 +247,9 @@ function showHeroSlide(index) {
 
     });
 
+    // Aggiorna la visibilità dei pulsanti freccia
+    updateArrowsVisibility(index);
+
     thumbnails[index].scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -276,6 +277,50 @@ document.addEventListener("keydown", (event) => {
         );
     }
 
+});
+
+
+/* =========================================
+   NAVIGAZIONE FRECCE (DENTRO LA FOTO)
+========================================= */
+
+function nextSlide() {
+    showHeroSlide(Math.min(currentSlide + 1, heroPhotos.length - 1));
+}
+
+function prevSlide() {
+    showHeroSlide(Math.max(currentSlide - 1, 0));
+}
+
+function updateArrowsVisibility(index) {
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    if (prevBtn && nextBtn) {
+        // Nasconde del tutto la freccia indietro alla prima slide
+        prevBtn.classList.toggle("hidden", index === 0);
+        
+        // Nasconde del tutto la freccia avanti all'ultima slide
+        nextBtn.classList.toggle("hidden", index === heroPhotos.length - 1);
+    }
+}
+
+// Spostiamo i bottoni dentro il contenitore delle slide principali e assegniamo i click
+document.addEventListener("DOMContentLoaded", () => {
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const controls = document.querySelector(".slider-controls");
+
+    if (slidesContainer && controls && prevBtn && nextBtn) {
+        // Inserisce fisicamente il div .slider-controls all'interno di #heroSlides
+        slidesContainer.appendChild(controls);
+
+        prevBtn.addEventListener("click", prevSlide);
+        nextBtn.addEventListener("click", nextSlide);
+
+        // Allinea lo stato iniziale delle frecce
+        updateArrowsVisibility(currentSlide);
+    }
 });
 
 

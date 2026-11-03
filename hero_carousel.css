@@ -1,4 +1,3 @@
-
 /* =========================================
    WANDERMORE - HERO CAROUSEL
 ========================================= */
@@ -32,7 +31,7 @@
     position: relative;
     display: block;
     width: 100%;
-    overflow: hidden;
+    /* Rimosso overflow hidden da qui per permettere il posizionamento assoluto delle frecce riferito all'immagine */
 }
 
 .hero-carousel-slide {
@@ -223,6 +222,61 @@
 }
 
 /* =========================================
+   GESTIONE NUOVA DELLE FRECCE DENTRO L'IMMAGINE
+========================================= */
+
+/* Le frecce sfruttano la larghezza del 75% dell'immagine e la sua altezza corretta */
+.slider-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75%; /* Identico alla larghezza di .hero-image */
+    height: 100%;
+    /* Calcola l'altezza basandosi sul modulo aspect-ratio di .hero-image */
+    aspect-ratio: 3 / 2; 
+    pointer-events: none; /* Impedisce al contenitore vuoto di bloccare i click sulla foto */
+    z-index: 10;
+}
+
+.slider-controls button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto; /* Ripristina i click esclusivamente sui pulsanti */
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+/* Freccia Indietro: dentro l'immagine sul lato sinistro */
+#prevBtn {
+    left: 15px;
+}
+
+/* Freccia Avanti: dentro l'immagine sul lato destro (bordo del 75%) */
+#nextBtn {
+    right: 15px;
+}
+
+.slider-controls button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Nasconde completamente il bottone all'inizio e alla fine dello slider */
+.slider-controls button.hidden {
+    display: none !important;
+}
+
+/* =========================================
    RESPONSIVE
 ========================================= */
 
@@ -234,6 +288,11 @@
 
     .hero-image {
         flex: none;
+        width: 100%;
+    }
+
+    /* Adatta il contenitore delle frecce quando l'immagine passa al 100% di larghezza */
+    .slider-controls {
         width: 100%;
     }
 
@@ -263,4 +322,163 @@
         width: 85px !important;
         height: 85px !important;
     }
+}
+
+/* =========================================
+   PULSANTE NEXT - HERO CAROUSEL
+========================================= */
+
+.btn-conteiner {
+    display: flex;
+    justify-content: center;
+
+    --color-text: #9ee5fa;
+    --color-background: #353535;
+}
+
+/* Pulsante principale */
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 3px;
+
+    background: var(--color-background);
+    border: none;
+    border-radius: 100px;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 0.2em var(--color-background);
+
+    transition: 0.5s;
+}
+
+/* Hover */
+
+.btn-content:hover,
+.btn-content:focus-visible {
+    outline: 0.1em solid transparent;
+    outline-offset: 0.2em;
+
+    box-shadow: 0 0 0.4em var(--color-background);
+
+    animation: btn-content 1s;
+}
+
+/* Icona */
+
+.btn-content .icon-arrow {
+    display: flex;
+    align-items: center;
+
+    width: 20px;
+    margin-left: 15px;
+
+    transform: scale(0.6);
+    transition: 0.5s;
+}
+
+/* Movimento della freccia */
+
+.btn-content:hover .icon-arrow {
+    margin-right: 25px;
+}
+
+/* Animazioni SVG */
+
+#arrow-icon-one {
+    transform: translateX(-60%);
+    transition: 0.4s;
+}
+
+#arrow-icon-two {
+    transform: translateX(-30%);
+    transition: 0.5s;
+}
+
+.btn-content:hover #arrow-icon-one,
+.btn-content:hover #arrow-icon-two {
+    transform: translateX(0);
+}
+
+.btn-content:hover #arrow-icon-one {
+    animation: color_anim 1s infinite 0.6s;
+}
+
+.btn-content:hover #arrow-icon-two {
+    animation: color_anim 1s infinite 0.4s;
+}
+
+.btn-content:hover #arrow-icon-three {
+    animation: color_anim 1s infinite 0.2s;
+}
+
+/* Colori animati */
+
+@keyframes color_anim {
+    0% {
+        fill: white;
+    }
+
+    50% {
+        fill: #353535;
+    }
+
+    100% {
+        fill: #9ee5fa;
+    }
+}
+
+@keyframes btn-content {
+    0% {
+        outline: 0.2em solid #353535;
+        outline-offset: 0;
+    }
+}
+
+/* =========================================
+   PREVIOUS BUTTON - FRECCIA SINISTRA
+========================================= */
+
+.btn-prev .icon-arrow {
+    transform: scale(0.6) rotate(180deg);
+}
+
+/* Movimento al passaggio del mouse */
+
+.btn-prev:hover .icon-arrow {
+    margin-right: 0;
+    margin-left: 25px;
+}
+
+/* Animazioni */
+
+.btn-prev:hover #prev-arrow-one,
+.btn-prev:hover #prev-arrow-two {
+    transform: translateX(0);
+}
+
+#prev-arrow-one {
+    transform: translateX(-60%);
+    transition: 0.4s;
+}
+
+#prev-arrow-two {
+    transform: translateX(-30%);
+    transition: 0.5s;
+}
+
+.btn-prev:hover #prev-arrow-one {
+    animation: color_anim 1s infinite 0.6s;
+}
+
+.btn-prev:hover #prev-arrow-two {
+    animation: color_anim 1s infinite 0.4s;
+}
+
+.btn-prev:hover #prev-arrow-three {
+    animation: color_anim 1s infinite 0.2s;
 }

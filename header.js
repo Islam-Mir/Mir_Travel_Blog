@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const menuIds = ["destinationsToggle", "aboutToggle"];
@@ -8,7 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!toggle) return;
 
-        const menu = toggle.nextElementSibling;
+        // Cerca il dropdown nel contenitore LI
+        const menu = toggle.closest(".nav-item.dropdown")
+                           .querySelector(".dropdown-menu");
+
+        if (!menu) return;
 
         toggle.addEventListener("click", function(e) {
 
@@ -21,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
+            // Apre o chiude il menu selezionato
             menu.classList.toggle("show");
 
         });
